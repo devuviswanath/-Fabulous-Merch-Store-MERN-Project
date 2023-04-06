@@ -30,8 +30,18 @@ var userSchema = new mongoose.Schema({
     role:{
         type: String,
         default: "user"
-    }
-});
+    },
+    cart:{
+        type:Array,
+        default: [],
+    },
+address:[{
+    type: isObjectIdOrHexString, ref:"Address"}],   
+},
+{
+    timeseries:true,
+}
+);
 
 // Encrypting the password
 userSchema.pre('save', async function(next) {
