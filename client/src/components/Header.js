@@ -34,7 +34,7 @@ const Header = () => {
                     <NavLink className="text-white" to="/orders">
                       ORDERS
                     </NavLink>
-                    <NavLink className="text-white" to="/">
+                    <NavLink className="text-white" to="/cart">
                       CART
                     </NavLink>
                   </div>
