@@ -111,9 +111,14 @@ footer {
 footer:not(:first-child) {
   border-top: 1px solid rgba(255, 255, 255, 0.1);
 }
+footer .input-group-text {
+  background-color: var(--color-232f3e);
+  color: white;
+  padding: 8px 17px;
+}
 /* Footer part ends */
 
-/*Login-auth crad*/
+/*auth card*/
 .auth-card {
   padding: 20px;
   background-color: white;
@@ -124,6 +129,10 @@ footer:not(:first-child) {
 .auth-card h3 {
   font-size: 19px;
   font-weight: 500;
+  color: var(--color-777777);
+}
+.auth-card p {
+  font-size: 13px;
   color: var(--color-777777);
 }
 .auth-card .form-control {
@@ -139,13 +148,22 @@ footer:not(:first-child) {
   font-weight: 400;
   color: var(--color-1c1c1b);
 }
-.auth-card .signup {
+.signup {
   background-color: var(--color-febd69);
   color: var(--color-131921);
+  border: none;
 }
-.auth-card .signup:hover {
+.signup:hover {
   background-color: var(--color-131921);
   color: white;
 }
 
-/*Login-auth cards end*/
+/*auth cards end*/
+
+/* Policy Pages */
+
+.policy {
+  background-color: white;
+  padding: 30px;
+}
+/* Policy Pages  ends */
