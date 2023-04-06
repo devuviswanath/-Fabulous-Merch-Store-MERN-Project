@@ -1,13 +1,16 @@
 import React from "react";
+import BreadCrumb from "../components/BreadCrumb";
+import Meta from "../components/Meta";
+import Container from "../components/Container";
 import { AiOutlineHome, AiOutlineMail } from "react-icons/ai";
 import { BiPhoneCall, BiInfoCircle } from "react-icons/bi";
 
 const Contact = () => {
   return (
     <>
-      {/* <meta title={"Contact Us"}/> */}
-      {/* breadCrumb */}
-      <div className="contact-wrapper py-5 home-wrapper-2">
+      <Meta title={"Contact Us"} />
+      <BreadCrumb title="Contact Us" />
+      <Container class1="contact-wrapper py-5 home-wrapper-2">
         <div className="container-xxl">
           <div className="row">
             <div className="col-12">
@@ -93,7 +96,7 @@ const Contact = () => {
             </div>
           </div>
         </div>
-      </div>
+      </Container>
     </>
   );
 };

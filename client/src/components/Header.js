@@ -1,6 +1,6 @@
-import React from 'react'
-import { Link, NavLink } from 'react-router-dom'
-import { BsSearch } from 'react-icons/bs'
+import React from "react";
+import { Link, NavLink } from "react-router-dom";
+import { BsSearch } from "react-icons/bs";
 
 const Header = () => {
   return (
@@ -21,17 +21,17 @@ const Header = () => {
                   <div className="d-flex align-items-center gap-15">
                     <NavLink className="text-white" to="/">
                       HOME
-                    </NavLink >
-                    <NavLink className="text-white" to="/">
+                    </NavLink>
+                    <NavLink className="text-white" to="/about">
                       ABOUT US
                     </NavLink>
-                    <NavLink className="text-white" to="/">
+                    <NavLink className="text-white" to="/login">
                       LOGIN
                     </NavLink>
-                    <NavLink className="text-white" to="/">
+                    <NavLink className="text-white" to="/contact">
                       CONTACT US
                     </NavLink>
-                    <NavLink className="text-white" to="/">
+                    <NavLink className="text-white" to="/orders">
                       ORDERS
                     </NavLink>
                     <NavLink className="text-white" to="/">
@@ -39,7 +39,6 @@ const Header = () => {
                     </NavLink>
                   </div>
                 </div>
-
               </div>
             </div>
           </div>
@@ -50,21 +49,23 @@ const Header = () => {
           <div className="row">
             <div className="col-5">
               <div class="input-group mb-3">
-                <input type="text"
+                <input
+                  type="text"
                   class="form-control"
                   placeholder="Search Product"
                   aria-label="Search Product"
                   aria-describedby="basic-addon2"
                 />
-                <span class="input-group-text"
-                  id="basic-addon2"><BsSearch /></span>
+                <span class="input-group-text" id="basic-addon2">
+                  <BsSearch />
+                </span>
               </div>
             </div>
           </div>
         </div>
       </header>
     </>
-  )
-}
+  );
+};
 
-export default Header
+export default Header;
