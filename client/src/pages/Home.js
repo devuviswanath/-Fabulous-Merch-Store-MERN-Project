@@ -15,7 +15,7 @@ const Home = () => {
           <div className="col-6">
             <div className="main-banner position-relative ">
               <img
-                src="images/main-banner-1.jpg"
+                src="../images/main-banner-1.jpg"
                 className="img-fluid rounded-3"
                 alt="main banner"
               />
@@ -108,7 +108,7 @@ const Home = () => {
           </div>
         </div>
       </Container>
-      <Container class1="home-wrapper-2 py-5">
+      {/* <Container class1="home-wrapper-2 py-5">
         <div className="row">
           <div className="col-12">
             <div className="categories d-flex justify-content-between flex-wrap align-items-center">
@@ -171,7 +171,7 @@ const Home = () => {
             </div>
           </div>
         </div>
-      </Container>
+      </Container> */}
       <Container class1="featured-wrapper py-5 home-wrapper-2">
         <div className="row">
           <div className="col-12">
@@ -310,27 +310,6 @@ const Home = () => {
         </div>
       </Container>
 
-      <Container class1="blog-wrapper py-5 home-wrapper-2">
-        <div className="row">
-          <div className="col-12">
-            <h3 className="section-heading">Our Latest Blogs</h3>
-          </div>
-        </div>
-        <div className="row">
-          <div className="col-3">
-            <BlogCard />
-          </div>
-          <div className="col-3">
-            <BlogCard />
-          </div>
-          <div className="col-3">
-            <BlogCard />
-          </div>
-          <div className="col-3">
-            <BlogCard />
-          </div>
-        </div>
-      </Container>
     </>
   );
 };
