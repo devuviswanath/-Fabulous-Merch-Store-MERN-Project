@@ -167,3 +167,29 @@ footer .input-group-text {
   padding: 30px;
 }
 /* Policy Pages  ends */
+
+/*about us*/
+.main_heading {
+  color: brown;
+}
+.story {
+  text-align: center;
+  font-weight: bold;
+}
+/*about us end*/
+
+/*Refund policy*/
+.refund {
+  font-size: 2em;
+  text-align: center;
+  font-weight: bold;
+}
+table tbody tr td {
+  border-collapse: collapse;
+  border: 1px solid black;
+}
+td {
+  text-align: center;
+}
+
+/*Refund policy end*/

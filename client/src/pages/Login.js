@@ -1,6 +1,5 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import BreadCrumb from "../components/BreadCrumb";
 import Meta from "../components/Meta";
 import Container from "../components/Container";
 import CustomInput from "../components/CustomInput";
@@ -8,7 +7,6 @@ const Login = () => {
   return (
     <>
       <Meta title={"Login"} />
-      <BreadCrumb title="Login" />
 
       <Container class1="login-wrapper py-5 home-wrapper-2">
         <div className="row">
