@@ -1,58 +1,65 @@
-// const mongoose = require('mongoose'); // Erase if already required
-// const bcrypt = require('bcrypt');
+const mongoose = require("mongoose"); // Erase if already required
 
-// // Declare the Schema of the Mongo model
-// var productSchema = new mongoose.Schema({
-//     title:{
-//         type:String,
-//         required:true,
-//         trim:true,
-//     },
-//     slug:{
-//         type:String,
-//         required:true,
-//         unique:true,
-//         lowercase:true,
-//     },
-//     description:{
-//         type:String,
-//         required:true,
-//     },
-//     price:{
-//         type:Number,
-//         required:true,
-//     },
-//     category:{
-//         type:mongoose.Schema.Types.ObjectId,
-//         ref:"Category",
-//     },
-//     quantity: Number,
-//     images:{
-//         type:Array,
-//     },
-//     color:{
-//         type:String,
-//         enum: ['Black', 'Blue']
-//     }
-    
-//     brand:{
-//         type: String,
-//         requred:true,
-//     }
+// Declare the Schema of the Mongo model
+var productSchema = new mongoose.Schema(
+  {
+    title: {
+      type: String,
+      required: true,
+      trim: true,
+    },
+    slug: {
+      type: String,
+      required: true,
+      unique: true,
+      lowercase: true,
+    },
+    description: {
+      type: String,
+      required: true,
+    },
+    price: {
+      type: Number,
+      required: true,
+    },
+    category: {
+      type: String,
+      required: true,
+    },
+    brand: {
+      type: String,
+      required: true,
+    },
+    quantity: {
+      type: Number,
+      required: true,
+    },
+    sold: {
+      type: Number,
+      default: 0,
+    },
+    images: [
+      {
+        public_id: String,
+        url: String,
+      },
+    ],
+    color: [],
+    tags: String,
+    ratings: [
+      {
+        star: Number,
+        comment: String,
+        postedby: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
+      },
+    ],
+    totalrating: {
+      type: String,
+      default: 0,
+    },
+  },
+  { timestamps: true }
+);
 
-// });
-
-// // Encrypting the password
-// userSchema.pre('save', async function(next) {
-//     const salt = await bcrypt.genSaltSync(10);
-//     this.password = await bcrypt.hash(this.password, salt);
-// });
-
-// // Comapring the entered password and already existing password
-// userSchema.methods.isPasswordMatched = async function(enteredPassword){
-//     return await bcrypt.compare(enteredPassword, this.password);
-// }
-
-// //Export the model
-// module.exports = mongoose.model('User', userSchema);
-
+//Export the model
+module.exports = mongoose.model("Product", productSchema);
