@@ -63,7 +63,7 @@ const Footer = () => {
                   Privacy Policy
                 </Link>
                 <Link to="/refund-policy" className="text-white py-2 mb-l">
-                  Returns Policy
+                  Return Policy
                 </Link>
                 <Link
                   to="/term-and-conditions"
