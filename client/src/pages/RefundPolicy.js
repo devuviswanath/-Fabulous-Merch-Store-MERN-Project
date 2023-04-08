@@ -10,7 +10,7 @@ const RefundPloicy = () => {
         <div className="row">
           <div className="col-12">
             <div className="policy">
-              <h1 class="refund">Returns Policy</h1>
+              <h1 className="refund">Returns Policy</h1>
               <p>
                 Returns is a scheme provided by respective sellers directly
                 under this policy in terms of which the option of exchange,
@@ -27,7 +27,7 @@ const RefundPloicy = () => {
                 sections carefully to understand the conditions and cases under
                 which returns will be accepted.
               </p>
-              <table cellSpacing="0" cellPadding="0" class="refund_table">
+              <table cellSpacing="0" cellPadding="0" className="refund_table">
                 <tbody>
                   <tr>
                     <td>

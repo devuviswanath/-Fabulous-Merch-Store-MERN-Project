@@ -4,16 +4,23 @@ import Container from "../components/Container";
 import CustomInput from "../components/CustomInput";
 import { useFormik } from "formik";
 import * as yup from "yup";
+import { useDispatch } from "react-redux";
+import { registerUser } from "../features/user/userSlice";
 
 const signupSchema = yup.object({
   fname: yup.string().required("First Name is Required"),
   lname: yup.string().required("Last Name is Required"),
-  email: yup.string().nullable().email("Email should be valid"),
+  email: yup
+    .string()
+    .nullable()
+    .email("Email should be valid")
+    .required("Email address is required"),
   number: yup.string().required("Mobile number is Required"),
   password: yup.string().required("Password is Required"),
 });
 
 const Signup = () => {
+  const dispatch = useDispatch();
   const formik = useFormik({
     initialValues: {
       fname: "",
@@ -24,7 +31,8 @@ const Signup = () => {
     },
     validationSchema: signupSchema,
     onSubmit: (values) => {
-      alert(JSON.stringify(values, null, 2));
+      console.log("values", values);
+      dispatch(registerUser(values));
     },
   });
 
