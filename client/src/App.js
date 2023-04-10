@@ -1,6 +1,6 @@
 import React from "react";
 import "./App.css";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route, useNavigate } from "react-router-dom";
 import Layout from "./components/Layout";
 import Home from "./pages/Home";
 import About from "./pages/About";
@@ -16,6 +16,7 @@ import TermAndContions from "./pages/TermAndConditions";
 import FAQ from "./pages/FAQ";
 import Orders from "./pages/Orders";
 import Checkout from "./pages/Checkout";
+import OurStore from "./pages/OurStore";
 
 function App() {
   return (
@@ -37,6 +38,7 @@ function App() {
             <Route path="faq" element={<FAQ />} />
             <Route path="orders" element={<Orders />} />
             <Route path="checkout" element={<Checkout />} />
+            <Route path="product" element={<OurStore />} />
           </Route>
         </Routes>
       </BrowserRouter>

@@ -1,10 +1,13 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Meta from "../components/Meta";
 import Container from "../components/Container";
 import CustomInput from "../components/CustomInput";
 import { useFormik } from "formik";
+import { useDispatch } from "react-redux";
 import * as yup from "yup";
+import { loginUser } from "../features/user/userSlice";
+import { useSelector } from "react-redux";
 
 const loginSchema = yup.object({
   email: yup
@@ -15,6 +18,12 @@ const loginSchema = yup.object({
 });
 
 const Login = () => {
+  const navigate = useNavigate();
+  const { isSuccess, user } = useSelector(({ auth }) => auth);
+  if (isSuccess && user?.email) {
+    navigate("/");
+  }
+  const dispatch = useDispatch();
   const formik = useFormik({
     initialValues: {
       email: "",
@@ -22,7 +31,7 @@ const Login = () => {
     },
     validationSchema: loginSchema,
     onSubmit: (values) => {
-      alert(JSON.stringify(values));
+      dispatch(loginUser(values));
     },
   });
   return (

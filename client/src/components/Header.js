@@ -1,8 +1,20 @@
 import React from "react";
-import { Link, NavLink } from "react-router-dom";
+import { Link, NavLink, useNavigate } from "react-router-dom";
 import { BsSearch } from "react-icons/bs";
+import { FaRegUser } from "react-icons/fa";
+import { useSelector, useDispatch } from "react-redux";
+import { logoutUser } from "../features/user/userSlice";
 
 const Header = () => {
+  const { user } = useSelector(({ auth }) => auth);
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const token = localStorage.getItem("token");
+  const signOut = () => {
+    dispatch(logoutUser(user));
+    localStorage.clear();
+  };
+
   return (
     <>
       <header className="header-upper py-3">
@@ -25,18 +37,48 @@ const Header = () => {
                     <NavLink className="text-white" to="/about">
                       ABOUT US
                     </NavLink>
-                    <NavLink className="text-white" to="/login">
-                      LOGIN
-                    </NavLink>
                     <NavLink className="text-white" to="/contact">
                       CONTACT US
                     </NavLink>
-                    <NavLink className="text-white" to="/orders">
-                      ORDERS
-                    </NavLink>
-                    <NavLink className="text-white" to="/cart">
-                      CART
-                    </NavLink>
+                    {token && (
+                      <Link className="text-white" to="/product">
+                        OUR STORE
+                      </Link>
+                    )}
+                    {token && (
+                      <Link
+                        className="text-white"
+                        onClick={
+                          user ? () => signOut() : () => navigate("/login")
+                        }
+                        to="/login"
+                      >
+                        LOGOUT
+                      </Link>
+                    )}
+                    {!token && (
+                      <NavLink className="text-white" to="/login">
+                        LOGIN
+                      </NavLink>
+                    )}
+                    {token && (
+                      <NavLink className="text-white" to="/orders">
+                        ORDERS
+                      </NavLink>
+                    )}
+                    {token && (
+                      <NavLink className="text-white" to="/cart">
+                        CART
+                      </NavLink>
+                    )}
+                    <div>
+                      <FaRegUser className="fs-5" style={{ color: "white" }} />
+                    </div>
+                    <div>
+                      <p className="mb-0" style={{ color: "white" }}>
+                        Hai {user?.fname}
+                      </p>
+                    </div>
                   </div>
                 </div>
               </div>

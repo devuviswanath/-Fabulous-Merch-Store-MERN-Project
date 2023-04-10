@@ -35,6 +35,7 @@ const createUser = asyncHandler(async (req, res) => {
     /**
      * TODO:if user found then thow an error: User already exists
      */
+    console.error();
     throw new Error("User Already Exists");
   }
 });
@@ -123,6 +124,7 @@ const handleRefreshToken = asyncHandler(async (req, res) => {
 // logout functionality
 
 const logout = asyncHandler(async (req, res) => {
+  console.log("req", req.cookies);
   const cookie = req.cookies;
   if (!cookie?.refreshToken) throw new Error("No Refresh Token in Cookies");
   const refreshToken = cookie.refreshToken;
@@ -338,34 +340,16 @@ const getWishlist = asyncHandler(async (req, res) => {
 });
 
 const userCart = asyncHandler(async (req, res) => {
-  const { cart } = req.body;
+  const { productId, color, quantity, price } = req.body;
   const { id } = req.user;
   validateMongoDbId(id);
   try {
-    let products = [];
-    const user = await User.findById(id);
-    // check if user already have product in cart
-    const alreadyExistCart = await Cart.findOne({ orderby: user.id });
-    if (alreadyExistCart) {
-      alreadyExistCart.remove();
-    }
-    for (let i = 0; i < cart.length; i++) {
-      let object = {};
-      object.product = cart[i].id;
-      object.count = cart[i].count;
-      object.color = cart[i].color;
-      let getPrice = await Product.findById(cart[i].id).select("price").exec();
-      object.price = getPrice.price;
-      products.push(object);
-    }
-    let cartTotal = 0;
-    for (let i = 0; i < products.length; i++) {
-      cartTotal = cartTotal + products[i].price * products[i].count;
-    }
     let newCart = await new Cart({
-      products,
-      cartTotal,
-      orderby: user?._id,
+      userId: id,
+      productId,
+      color,
+      quantity,
+      price,
     }).save();
     res.json(newCart);
   } catch (error) {
