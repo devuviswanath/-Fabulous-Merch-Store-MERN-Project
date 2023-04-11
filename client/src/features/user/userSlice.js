@@ -82,6 +82,17 @@ export const createAnOrder = createAsyncThunk(
   }
 );
 
+export const getOrderByUser = createAsyncThunk(
+  "order/get-order",
+  async (id, thunkAPI) => {
+    try {
+      return await authService.getOrder(id);
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error);
+    }
+  }
+);
+
 const getCustomerfromLocalStorate = localStorage.getItem("customer")
   ? JSON.parse(localStorage.getItem("customer"))
   : null;

@@ -7,29 +7,61 @@ import Color from "../components/Color";
 import Container from "../components/Container";
 import { useDispatch, useSelector } from "react-redux";
 import { getAllProducts } from "../features/product/productSlice";
-import { getCategories} from "../features/pcategory/pcategorySlice";
+import { getCategories } from "../features/pcategory/pcategorySlice";
 
 const OurStore = () => {
   const [grid, setGrid] = useState(4);
+  const [selectedCategories, setSelectedCategories] = useState([]);
+  const [filteredData, setFilteredData] = useState([]);
   const [query, setQuery] = useState({
     category: "",
     price: {
       gte: "",
       lte: ""
-    },
-    page: "1",
-    limit: "20"
+    }
   });
-  const productState = useSelector((state) => state?.product?.products);
+  const [params, setParams] = useState({});
+  const productState = useSelector((state) => state?.product?.product);
   const pCatStat = useSelector((state) => state?.pCategory?.pCategories);
-  console.log(pCatStat)
   const dispatch = useDispatch();
-  useEffect(()=>{
-    dispatch(getAllProducts());
-    dispatch(getCategories());
-  },[])
+  useEffect(() => {
+    const newParams = {};
 
- 
+    for (const [key, value] of Object.entries(query)) {
+      if (value && typeof value === 'object') {
+        for (const [subKey, subValue] of Object.entries(value)) {
+          if (subValue) {
+            newParams[`${key}[${subKey}]`] = subValue;
+          }
+        }
+      } else if (value) {
+        newParams[key] = value;
+      }
+    }
+
+    if (Object.keys(newParams).length) {
+      setParams(newParams);
+    } else {
+      setParams({});
+    }
+  }, [query]);
+console.log(query)
+  useEffect(() => {
+    dispatch(getAllProducts(params));
+    dispatch(getCategories());
+  }, [])
+
+  const handleCheckboxChange = (event) => {
+    const { value, checked } = event.target;
+    console.log(value)
+    if (checked) {
+      setSelectedCategories([...selectedCategories, value]); // Add selected category to array
+    } else {
+      setSelectedCategories(selectedCategories.filter(category => category !== value)); // Remove deselected category from array
+    }
+
+    setQuery({ ...query, category: selectedCategories });
+  };
   return (
     <>
       <Meta title={"Our Store"} />
@@ -41,55 +73,59 @@ const OurStore = () => {
               <div>
                 <h5 className="sub-title">Category</h5>
                 <div>
-                  <div className="form-check">
-                    <input
-                      className="form-check-input"
-                      type="checkbox"
-                      value=""
-                      id=""
-                    />
-                    <label className="form-check-label" htmlFor="">
-                      In Stock (1)
-                    </label>
-                  </div>
-                  <div className="form-check">
-                    <input
-                      className="form-check-input"
-                      type="checkbox"
-                      value=""
-                      id=""
-                    />
-                    <label className="form-check-label" htmlFor="">
-                      Out of Stock(0)
-                    </label>
+                  <div className="multi-check">
+                    {pCatStat?.map((item, index) => {
+                      return (
+                        <label key={item.title}>
+                          <input
+                            type="checkbox"
+                            value={item.title}
+                            checked={selectedCategories.includes(item.title)}
+                            onChange={handleCheckboxChange}
+                          />
+                          {item.title}
+                        </label>)
+                    })}
                   </div>
                 </div>
                 <h5 className="sub-title">Price</h5>
                 <div className="d-flex align-items-center gap-10">
                   <div className="form-floating">
                     <input
-                      type="email"
+                      type="number"
                       className="form-control"
-                      id="floatingInput"
-                      placeholder="From"
+                      id="minPrice"
+                      value={query.price.gte}
+                      onChange={(event) =>
+                        setQuery({
+                          ...query,
+                          price: { ...query.price, gte: event.target.value }
+                        })
+                      }
                     />
                     <label htmlFor="floatingInput">From</label>
                   </div>
                   <div className="form-floating">
                     <input
-                      type="email"
+                      type="number"
                       className="form-control"
-                      id="floatingInput1"
-                      placeholder="To"
+                      id="maxPrice"
+                      value={query.price.lte}
+                      onChange={(event) =>
+                        setQuery({
+                          ...query,
+                          price: { ...query.price, lte: event.target.value }
+                        })
+                      }
                     />
-                    <label htmlFor="floatingInput1">To</label>
+                    <label htmlFor="floatingInput">To</label>
                   </div>
                 </div>
-                <h5 className="sub-title">Colors</h5>
+                {/* <h5 className="sub-title">Colors</h5>
                 <div>
                   <Color />
-                </div>
-                <h5 className="sub-title">Size</h5>
+                </div> */}
+                {/* <h5 className="sub-title">Size</h5>
                 <div>
                   <div className="form-check">
                     <input
@@ -113,7 +149,7 @@ const OurStore = () => {
                       M (2)
                     </label>
                   </div>
-                </div>
+                </div> */}
               </div>
             </div>
             <div className="filter-card mb-3">
@@ -190,9 +226,9 @@ const OurStore = () => {
               <div className="d-flex justify-content-between align-items-center">
                 <div className="d-flex align-items-center gap-10">
                   <p className="mb-0 d-block" style={{ width: "100px" }}>
-                    Sort By:
+
                   </p>
-                  <select
+                  {/* <select
                     name=""
                     defaultValue={"manula"}
                     className="form-control form-select"
@@ -208,10 +244,10 @@ const OurStore = () => {
                     <option value="price-descending">Price, high to low</option>
                     <option value="created-ascending">Date, old to new</option>
                     <option value="created-descending">Date, new to old</option>
-                  </select>
+                  </select> */}
                 </div>
                 <div className="d-flex align-items-center gap-10">
-                  <p className="totalproducts mb-0">21 Products</p>
+                  <p className="totalproducts mb-0">{`${productState.length} products`}</p>
                   <div className="d-flex gap-10 align-items-center grid">
                     <img
                       onClick={() => {

@@ -724,6 +724,10 @@ td {
   font-size: 14px;
   color: var(--color-777777);
 }
+.multi-check{
+  display: flex;
+  flex-direction: column;
+}
 /* Main Product Page */
 
 /* Cart Page */

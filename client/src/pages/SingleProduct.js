@@ -22,7 +22,7 @@ const SingleProduct = () => {
   const location = useLocation();
   const getProductId = location.pathname.split("/")[2];
   const dispatch = useDispatch();
-  const productState = useSelector((state) => state.product.singleProduct);
+  const productState = useSelector((state) => state.product.singleproduct);
   const cartState = useSelector((state) => state.auth.cartProducts);
   useEffect(() => {
     dispatch(getAProduct(getProductId));
@@ -247,7 +247,9 @@ const SingleProduct = () => {
           <div className="col-12">
             <h4>Description</h4>
             <div className="bg-white p-3">
-              <p>{productState?.description}</p>
+              <p
+                dangerouslySetInnerHTML={{ __html: productState?.description }}>
+                </p>
             </div>
           </div>
         </div>

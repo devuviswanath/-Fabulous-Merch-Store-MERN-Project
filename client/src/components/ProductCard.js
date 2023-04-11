@@ -50,8 +50,8 @@ const ProductCard = (props) => {
                   edit={false}
                   activeColor="#ffd700"
                 />
-                <p className={`description ${grid === 12 ? "d-block" : "d-none"}`}>
-                  {item?.description }
+                <p className={`description ${grid === 12 ? "d-block" : "d-none"}`}
+                dangerouslySetInnerHTML={{ __html: item?.description }}>
                 </p>
                 <p className="price">{item.price}</p>
               </div>

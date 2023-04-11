@@ -70,6 +70,16 @@ const createOrder = async (orderDetail) => {
   }
 };
 
+const getOrder = async (id) => {
+  const response = await instance.get(
+    `${base_url}user/getorderbyuser/${id}`,
+    "",
+    config
+  );
+
+  return response.data;
+};
+
 export const authService = {
   register,
   login,
@@ -79,4 +89,5 @@ export const authService = {
   removeProductFromCart,
   updateProductFromCart,
   createOrder,
+  getOrder
 };
