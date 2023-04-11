@@ -1,11 +1,13 @@
 const fs = require("fs");
 const asyncHandler = require("express-async-handler");
+const validateMongoDbId = require("../utils/validateMongodbId");
 
 const {
   cloudinaryUploadImg,
   cloudinaryDeleteImg,
 } = require("../utils/cloudinary");
 const uploadImages = asyncHandler(async (req, res) => {
+  console.log("inside upload");
   try {
     const uploader = (path) => cloudinaryUploadImg(path, "images");
     const urls = [];

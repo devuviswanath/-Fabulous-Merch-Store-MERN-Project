@@ -7,40 +7,39 @@ import Color from "../components/Color";
 import Container from "../components/Container";
 import { useDispatch, useSelector } from "react-redux";
 import { getAllProducts } from "../features/product/productSlice";
+import { getCategories} from "../features/pcategory/pcategorySlice";
 
 const OurStore = () => {
   const [grid, setGrid] = useState(4);
-  const productState = useSelector((state) => state?.product?.product);
+  const [query, setQuery] = useState({
+    category: "",
+    price: {
+      gte: "",
+      lte: ""
+    },
+    page: "1",
+    limit: "20"
+  });
+  const productState = useSelector((state) => state?.product?.products);
+  const pCatStat = useSelector((state) => state?.pCategory?.pCategories);
+  console.log(pCatStat)
   const dispatch = useDispatch();
-  const getProducts = () => {
+  useEffect(()=>{
     dispatch(getAllProducts());
-  };
-  useEffect(() => {
-    getProducts();
-  }, []);
+    dispatch(getCategories());
+  },[])
 
+ 
   return (
     <>
       <Meta title={"Our Store"} />
-      <BreadCrumb title="Our Store" />
       <Container class1="store-wrapper home-wrapper-2 py-5">
         <div className="row">
           <div className="col-3">
             <div className="filter-card mb-3">
-              <h3 className="filter-title">Shop By Categories</h3>
-              <div>
-                <ul className="ps-0">
-                  <li>Watch</li>
-                  <li>Tv</li>
-                  <li>Camera</li>
-                  <li>Laptop</li>
-                </ul>
-              </div>
-            </div>
-            <div className="filter-card mb-3">
               <h3 className="filter-title">Filter By</h3>
               <div>
-                <h5 className="sub-title">Availablity</h5>
+                <h5 className="sub-title">Category</h5>
                 <div>
                   <div className="form-check">
                     <input
