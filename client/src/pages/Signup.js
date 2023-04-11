@@ -4,8 +4,9 @@ import Container from "../components/Container";
 import CustomInput from "../components/CustomInput";
 import { useFormik } from "formik";
 import * as yup from "yup";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { registerUser } from "../features/user/userSlice";
+import { useNavigate } from "react-router-dom";
 
 const signupSchema = yup.object({
   fname: yup.string().required("First Name is Required"),
@@ -20,6 +21,12 @@ const signupSchema = yup.object({
 });
 
 const Signup = () => {
+  const navigate = useNavigate();
+  const { isSuccess, createdUser } = useSelector(({ auth }) => auth);
+  console.log("createdUser", createdUser?.email);
+  if (isSuccess) {
+    navigate("/login");
+  }
   const dispatch = useDispatch();
   const formik = useFormik({
     initialValues: {
@@ -31,7 +38,6 @@ const Signup = () => {
     },
     validationSchema: signupSchema,
     onSubmit: (values) => {
-      console.log("values", values);
       dispatch(registerUser(values));
     },
   });

@@ -1,10 +1,37 @@
-import React from "react";
+import React, { useRef } from "react";
+import emailjs from "@emailjs/browser";
 import Meta from "../components/Meta";
 import Container from "../components/Container";
 import { AiOutlineHome, AiOutlineMail } from "react-icons/ai";
 import { BiPhoneCall, BiInfoCircle } from "react-icons/bi";
+import { toast } from "react-toastify";
 
 const Contact = () => {
+  const form = useRef();
+
+  const sendEmail = (e) => {
+    e.preventDefault();
+
+    emailjs
+      .sendForm(
+        "service_vkow1yj",
+        "template_iywtmaq",
+        form.current,
+        "i5YblMb9e0ECDegph"
+      )
+      .then(
+        (result) => {
+          e.target.reset();
+          toast.info("Message Sent Successfully");
+          console.log(result.text);
+          console.log("Message sent");
+        },
+        (error) => {
+          console.log(error.text);
+        }
+      );
+  };
+
   return (
     <>
       <Meta title={"Contact Us"} />
@@ -26,12 +53,17 @@ const Contact = () => {
               <div className="contact-inner-wrapper d-flex justify-content-between">
                 <div>
                   <h3 className="contact-title">Contact</h3>
-                  <form action="" className="d-flex flex-column gap-15">
+                  <form
+                    ref={form}
+                    onSubmit={sendEmail}
+                    className="d-flex flex-column gap-15"
+                  >
                     <div>
                       <input
                         type="text"
                         className="form-control"
                         placeholder="Name"
+                        name="name"
                       />
                     </div>
                     <div>
@@ -39,6 +71,7 @@ const Contact = () => {
                         type="email"
                         className="form-control"
                         placeholder="Email"
+                        name="email"
                       />
                     </div>
                     <div>
@@ -46,11 +79,12 @@ const Contact = () => {
                         type="tel"
                         className="form-control"
                         placeholder="Mobile Number"
+                        name="phone"
                       />
                     </div>
                     <div>
                       <textarea
-                        name=""
+                        name="message"
                         className="w-100 form-control"
                         id=""
                         cols="30"
@@ -59,7 +93,11 @@ const Contact = () => {
                       ></textarea>
                     </div>
                     <div>
-                      <button className="button border-0">Submit</button>
+                      <input
+                        type="submit"
+                        value="Send"
+                        className="button border-0"
+                      />
                     </div>
                   </form>
                 </div>

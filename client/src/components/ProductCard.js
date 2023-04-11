@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import ReactStars from "react-rating-stars-component";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import prodcompare from "../images/prodcompare.svg";
@@ -12,18 +12,24 @@ const ProductCard = (props) => {
   const { grid, data } = props;
   const navigate = useNavigate();
   let location = useLocation();
+  let newdata;
+  if (data) {
+    newdata = Object.values(data);
+  } else {
+    newdata = data;
+  }
 
   return (
     <>
-      {data?.map((item, index) => {
+      {newdata?.map((item, index) => {
         return (
           <div
             key={index}
-            className={` ${location.pathname == "/product" ? `gr-${grid}` : "col-3"
-              } `}
+            className={` ${
+              location.pathname == "/product" ? `gr-${grid}` : "col-3"
+            } `}
           >
-            <div className="product-card position-relative"
-            >
+            <div className="product-card position-relative">
               <div className="wishlist-icon position-absolute">
                 <button className="border-0 bg-transparent">
                   <img src={wish} alt="wishlist" />
@@ -36,9 +42,7 @@ const ProductCard = (props) => {
               </div>
               <div className="product-details">
                 <h6 className="brand">{item.brand}</h6>
-                <h5 className="product-title">
-                  {item.title}
-                </h5>
+                <h5 className="product-title">{item.title}</h5>
                 <ReactStars
                   count={5}
                   size={24}
@@ -56,7 +60,10 @@ const ProductCard = (props) => {
                   <button className="border-0 bg-transparent">
                     <img src={prodcompare} alt="compare" />
                   </button>
-                  <Link  to ={'/product/'+ item?._id} className="border-0 bg-transparent">
+                  <Link
+                    to={"/product/" + item?._id}
+                    className="border-0 bg-transparent"
+                  >
                     <img src={view} alt="view" />
                   </Link>
                   <button className="border-0 bg-transparent">
@@ -66,7 +73,7 @@ const ProductCard = (props) => {
               </div>
             </div>
           </div>
-        )
+        );
       })}
     </>
   );

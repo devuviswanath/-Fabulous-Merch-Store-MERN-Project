@@ -45,7 +45,7 @@ export const productSlice = createSlice({
         state.isLoading = false;
         state.isError = false;
         state.isSuccess = true;
-        state.products = action.payload;
+        state.product = action.payload;
       })
       .addCase(getAllProducts.rejected, (state, action) => {
         state.isLoading = false;
@@ -68,7 +68,7 @@ export const productSlice = createSlice({
         state.isError = true;
         state.isSuccess = false;
         state.message = action.error;
-      })
+      });
   },
 });
 export default productSlice.reducer;
