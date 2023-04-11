@@ -1,14 +1,13 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { BiArrowBack } from "react-icons/bi";
-import watch from "../images/watch.jpg";
 import Container from "../components/Container";
 import { useDispatch, useSelector } from "react-redux";
 import { useFormik } from "formik";
 import * as yup from "yup";
 import axios from "axios";
 import { base_url, instance } from "../utils/axiosConfig";
-import { createAnOrder } from "../features/user/userSlice";
+import { createAnOrder, emptyCart } from "../features/user/userSlice";
 
 const shippingSchema = yup.object({
   firstName: yup.string().required("First name is Required"),
@@ -51,7 +50,10 @@ const Checkout = () => {
     onSubmit: (values) => {
       setShippingInfo(values);
       axios
-        .post(`${base_url}stripe/create-checkout-session`, { values, userId })
+        .post(`${base_url}stripe/create-checkout-session`, {
+          cartState,
+          userId,
+        })
         .then((res) => {
           if (res.data.url) {
             window.location.href = res.data.url;
@@ -84,7 +86,8 @@ const Checkout = () => {
         shippingInfo: values,
         // paymentInfo,
       })
-    ).catch((err) => console.log(err.message));
+    );
+    dispatch(emptyCart());
   };
 
   return (

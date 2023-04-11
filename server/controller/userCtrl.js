@@ -401,11 +401,11 @@ const updateProductQuantityFromCart = asyncHandler(async (req, res) => {
 });
 
 const emptyCart = asyncHandler(async (req, res) => {
-  const { _id } = req.user;
+  const { _id } = req.user._id;
   validateMongoDbId(_id);
   try {
     const user = await User.findOne({ _id });
-    const cart = await Cart.findOneAndRemove({ orderby: user._id });
+    const cart = await Cart.deleteMany({ userId: user });
     res.json(cart);
   } catch (error) {
     throw new Error(error);
