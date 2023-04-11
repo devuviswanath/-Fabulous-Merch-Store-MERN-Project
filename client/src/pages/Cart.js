@@ -51,7 +51,6 @@ const Cart = () => {
   return (
     <>
       <Meta title={"Cart"} />
-      <BreadCrumb title="Cart" />
       <Container class1="cart-wrapper home-wrapper-2 py-5">
         <div className="row">
           <div className="col-12">

@@ -6,19 +6,20 @@ const stripe = Stripe(process.env.STRIPE_KEY);
 const router = express.Router();
 
 router.post("/create-checkout-session", async (req, res) => {
-  const session = await stripe.checkout.sessions.create({
-    line_items: [
-      {
-        price_data: {
-          currency: "usd",
-          product_data: {
-            name: "T-shirt",
-          },
-          unit_amount: 2000,
+  const line_items = req.body.cartState?.map((item) => {
+    return {
+      price_data: {
+        currency: "CAD",
+        product_data: {
+          name: item?.productId?.title,
         },
-        quantity: 1,
+        unit_amount: item?.productId?.price * 100,
       },
-    ],
+      quantity: item?.quantity,
+    };
+  });
+  const session = await stripe.checkout.sessions.create({
+    line_items,
     mode: "payment",
     success_url: `${process.env.CLIENT_URL}/orders`,
     cancel_url: `${process.env.CLIENT_URL}/checkout`,

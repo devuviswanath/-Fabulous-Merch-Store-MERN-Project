@@ -69,6 +69,13 @@ const createOrder = async (orderDetail) => {
     return response.data;
   }
 };
+const emptyCartItems = async () => {
+  const response = await instance.delete(`${base_url}user/empty-cart`, config);
+  console.log("***********", response);
+  if (response.data) {
+    return response.data;
+  }
+};
 
 export const authService = {
   register,
@@ -79,4 +86,5 @@ export const authService = {
   removeProductFromCart,
   updateProductFromCart,
   createOrder,
+  emptyCartItems,
 };
