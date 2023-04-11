@@ -18,7 +18,6 @@ import TermAndContions from "./pages/TermAndConditions";
 import FAQ from "./pages/FAQ";
 import Orders from "./pages/Orders";
 import Checkout from "./pages/Checkout";
-import OurStore from "./pages/OurStore";
 
 function App() {
   return (
@@ -42,7 +41,6 @@ function App() {
             <Route path="faq" element={<FAQ />} />
             <Route path="orders" element={<Orders />} />
             <Route path="checkout" element={<Checkout />} />
-            <Route path="product" element={<OurStore />} />
           </Route>
         </Routes>
       </BrowserRouter>

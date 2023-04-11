@@ -18,16 +18,10 @@ const ProductCard = (props) => {
   } else {
     newdata = data;
   }
-  const uploadCart = () => {
-    alert("add cart");
-  };
-  /*cart*/
-  const [quantity, setQuantity] = useState(1);
-  /*cart*/
 
   return (
     <>
-      {data?.map((item, index) => {
+      {newdata?.map((item, index) => {
         return (
           <div
             key={index}

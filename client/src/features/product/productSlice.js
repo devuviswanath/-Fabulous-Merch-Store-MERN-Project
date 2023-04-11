@@ -60,7 +60,7 @@ export const productSlice = createSlice({
         state.isLoading = false;
         state.isError = false;
         state.isSuccess = true;
-        state.product = action.payload;
+        state.singleProduct = action.payload;
         state.message = "Product fetched";
       })
       .addCase(getAProduct.rejected, (state, action) => {

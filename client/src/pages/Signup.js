@@ -38,7 +38,6 @@ const Signup = () => {
     },
     validationSchema: signupSchema,
     onSubmit: (values) => {
-      console.log("values", values);
       dispatch(registerUser(values));
     },
   });

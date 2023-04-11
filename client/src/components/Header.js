@@ -2,6 +2,7 @@ import React from "react";
 import { Link, NavLink, useNavigate } from "react-router-dom";
 import { BsSearch } from "react-icons/bs";
 import { FaRegUser } from "react-icons/fa";
+import { AiOutlineShoppingCart } from "react-icons/ai";
 import { useSelector, useDispatch } from "react-redux";
 import { logoutUser } from "../features/user/userSlice";
 
@@ -9,6 +10,7 @@ const Header = () => {
   const { user } = useSelector(({ auth }) => auth);
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const cartState = useSelector((state) => state?.auth?.cartProducts);
   const token = localStorage.getItem("token");
   const signOut = () => {
     dispatch(logoutUser(user));
@@ -40,12 +42,12 @@ const Header = () => {
                     <NavLink className="text-white" to="/contact">
                       CONTACT US
                     </NavLink>
-                    {token && (
+                    {user?._id && (
                       <Link className="text-white" to="/product">
                         OUR STORE
                       </Link>
                     )}
-                    {token && (
+                    {user?._id && (
                       <Link
                         className="text-white"
                         onClick={
@@ -56,19 +58,26 @@ const Header = () => {
                         LOGOUT
                       </Link>
                     )}
-                    {!token && (
+                    {!user?._id && (
                       <NavLink className="text-white" to="/login">
                         LOGIN
                       </NavLink>
                     )}
-                    {token && (
+                    {user?._id && (
                       <NavLink className="text-white" to="/orders">
                         ORDERS
                       </NavLink>
                     )}
-                    {token && (
+                    {user?._id && (
                       <NavLink className="text-white" to="/cart">
+                        <AiOutlineShoppingCart
+                          className="fs-3"
+                          style={{ color: "white" }}
+                        />
                         CART
+                        <span className="badge  bg-white text-dark">
+                          {cartState?.length ? cartState?.length : 0}
+                        </span>
                       </NavLink>
                     )}
                     <div>

@@ -15,13 +15,40 @@ const colorRouter = require("./routes/colorRoute");
 const enqRouter = require("./routes/enqRoute");
 const couponRouter = require("./routes/couponRoute");
 const uploadRouter = require("./routes/uploadRoute");
+const Stripe = require("./routes/stripe");
 const cookieParser = require("cookie-parser");
 const morgan = require("morgan");
 const cors = require("cors");
 
 dbConnect();
 app.use(morgan("dev"));
-app.use(cors());
+//app.use(cors());
+let origins = [""]; //set your prod origins here
+app.use((req, res, next) => {
+  let origin = req.headers.origin;
+  if (process.env.NODE_ENV === "production") {
+    let org = origins.find((o) => o === origin) || origins[0];
+    res.setHeader("Access-Control-Allow-Origin", org);
+  } else {
+    res.setHeader("Access-Control-Allow-Origin", origin || "*");
+  }
+  res.setHeader("Access-Control-Allow-Credentials", true);
+  res.setHeader(
+    "Access-Control-Allow-Headers",
+    "Content-Type, Authorization, X-Requested-With"
+  );
+  //res.setHeader("Content-Type", "application/json");
+  res.setHeader(
+    "Access-Control-Allow-Methods",
+    "GET, POST, OPTIONS, PUT, PATCH, DELETE"
+  );
+  if ("OPTIONS" === req.method) {
+    return res.status(200).send("Ok");
+  } else {
+    next();
+  }
+});
+
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
@@ -35,6 +62,7 @@ app.use("/api/coupon", couponRouter);
 app.use("/api/color", colorRouter);
 app.use("/api/enquiry", enqRouter);
 app.use("/api/upload", uploadRouter);
+app.use("/api/stripe", Stripe);
 
 app.use(notFound);
 app.use(errorHandler);
