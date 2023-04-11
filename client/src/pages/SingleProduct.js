@@ -17,7 +17,7 @@ const SingleProduct = () => {
     const location = useLocation();
     const getProductId = location.pathname.split("/")[2];
     const dispatch = useDispatch();
-    const productState = useSelector(state => state.product.product);
+    const productState = useSelector(state => state.product.singleproduct);
     useEffect(() => {
         dispatch(getAProduct(getProductId));;
     }, [])
@@ -26,7 +26,7 @@ const SingleProduct = () => {
         height: 600,
         zoomWidth: 600,
 
-        img: "https://images.pexels.com/photos/190819/pexels-photo-190819.jpeg?cs=srgb&dl=pexels-fernando-arcos-190819.jpg&fm=jpg",
+        img: productState?.images[0]?.url? productState?.images[0]?.url:{watch},
     };
 
     const [orderedProduct, setorderedProduct] = useState(true);
@@ -43,7 +43,6 @@ const SingleProduct = () => {
     return (
         <>
             <Meta title={"Product Name"} />
-            <BreadCrumb title="Product Name" />
             <Container class1="main-product-wrapper py-5 home-wrapper-2">
                 <div className="row">
                     <div className="col-6">
@@ -52,36 +51,36 @@ const SingleProduct = () => {
                                 <ReactImageZoom {...props} />
                             </div>
                         </div>
-                        <div className="other-product-images d-flex flex-wrap gap-15">
+                        {/* <div className="other-product-images d-flex flex-wrap gap-15">
                             <div>
                                 <img
-                                    src="https://images.pexels.com/photos/190819/pexels-photo-190819.jpeg?cs=srgb&dl=pexels-fernando-arcos-190819.jpg&fm=jpg"
+                                    src=""
                                     className="img-fluid"
                                     alt=""
                                 />
                             </div>
                             <div>
                                 <img
-                                    src="https://images.pexels.com/photos/190819/pexels-photo-190819.jpeg?cs=srgb&dl=pexels-fernando-arcos-190819.jpg&fm=jpg"
+                                    src=""
                                     className="img-fluid"
                                     alt=""
                                 />
                             </div>
                             <div>
                                 <img
-                                    src="https://images.pexels.com/photos/190819/pexels-photo-190819.jpeg?cs=srgb&dl=pexels-fernando-arcos-190819.jpg&fm=jpg"
+                                    src=""
                                     className="img-fluid"
                                     alt=""
                                 />
                             </div>
                             <div>
                                 <img
-                                    src="https://images.pexels.com/photos/190819/pexels-photo-190819.jpeg?cs=srgb&dl=pexels-fernando-arcos-190819.jpg&fm=jpg"
+                                    src=""
                                     className="img-fluid"
                                     alt=""
                                 />
                             </div>
-                        </div>
+                        </div> */}
                     </div>
                     <div className="col-6">
                         <div className="main-product-details">
@@ -173,7 +172,7 @@ const SingleProduct = () => {
                                         <button className="button signup">Buy It Now</button>
                                     </div>
                                 </div>
-                                <div className="d-flex align-items-center gap-15">
+                                {/* <div className="d-flex align-items-center gap-15">
                                     <div>
                                         <a href="">
                                             <TbGitCompare className="fs-5 me-2" /> Add to Compare
@@ -184,7 +183,7 @@ const SingleProduct = () => {
                                             <AiOutlineHeart className="fs-5 me-2" /> Add to Wishlist
                                         </a>
                                     </div>
-                                </div>
+                                </div> */}
                                 <div className="d-flex gap-10 flex-column  my-3">
                                     <h3 className="product-heading">Shipping & Returns :</h3>
                                     <p className="product-data">
@@ -193,7 +192,7 @@ const SingleProduct = () => {
                                         <b>5-10 business days!</b>
                                     </p>
                                 </div>
-                                <div className="d-flex gap-10 align-items-center my-3">
+                                {/* <div className="d-flex gap-10 align-items-center my-3">
                                     <h3 className="product-heading">Product Link:</h3>
                                     <a
                                         href="javascript:void(0);"
@@ -205,7 +204,7 @@ const SingleProduct = () => {
                                     >
                                         Copy Product Link
                                     </a>
-                                </div>
+                                </div> */}
                             </div>
                         </div>
                     </div>

@@ -30,9 +30,9 @@ const ProductCard = (props) => {
                 </button>
               </div>
               <div className="product-image">
-                {/* item.images[0].url */}
-                <img src={watch} className="img-fluid  mx-auto" alt="product image" />
-                <img src={watch2} className="img-fluid  mx-auto" alt="product image" />
+                
+                <img src={item?.images[0]?.url} className="img-fluid  mx-auto" alt="product image" />
+                <img src={item?.images[0]?.url} className="img-fluid  mx-auto" alt="product image" />
               </div>
               <div className="product-details">
                 <h6 className="brand">{item.brand}</h6>
@@ -46,9 +46,8 @@ const ProductCard = (props) => {
                   edit={false}
                   activeColor="#ffd700"
                 />
-                <p className={`description ${grid === 12 ? "d-block" : "d-none"}`}
-                  dangerouslySetInnerHtml={{ __html: item?.description }}
-                >
+                <p className={`description ${grid === 12 ? "d-block" : "d-none"}`}>
+                  {item?.description }
                 </p>
                 <p className="price">{item.price}</p>
               </div>

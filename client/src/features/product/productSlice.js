@@ -25,7 +25,7 @@ export const getAProduct = createAsyncThunk(
 
 export const resetState = createAction("Reset_all");
 
-const productStaState = {
+const productState = {
   product: "",
   isError: false,
   isLoading: false,
@@ -34,7 +34,7 @@ const productStaState = {
 };
 export const productSlice = createSlice({
   name: "products",
-  initialState: productStaState,
+  initialState: productState,
   reducers: {},
   extraReducers: (builder) => {
     builder
@@ -60,7 +60,7 @@ export const productSlice = createSlice({
         state.isLoading = false;
         state.isError = false;
         state.isSuccess = true;
-        state.product = action.payload;
+        state.singleproduct = action.payload;
         state.message = "Product fetched";
       })
       .addCase(getAProduct.rejected, (state, action) => {
