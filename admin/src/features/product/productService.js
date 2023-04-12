@@ -13,6 +13,27 @@ const createProduct = async (product) => {
   return response.data;
 };
 
+const updateProduct = async (product) => {
+  const response = await axios.put(
+    `${base_url}product/${product.id}`,
+    // { title: brand.brandData.title },
+    config
+  );
+
+  return response.data;
+};
+const getBrand = async (id) => {
+  const response = await axios.get(`${base_url}brand/${id}`, config);
+
+  return response.data;
+};
+
+const deleteBrand = async (id) => {
+  const response = await axios.delete(`${base_url}brand/${id}`, config);
+
+  return response.data;
+};
+
 const productService = {
   getProducts,
   createProduct,

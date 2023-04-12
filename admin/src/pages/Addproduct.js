@@ -43,6 +43,7 @@ const Addproduct = () => {
   useEffect(() => {
     if (isSuccess && createdProduct) {
       toast.success("Product Added Successfullly!");
+      navigate("/admin/list-product");
     }
     if (isError) {
       toast.error("Something Went Wrong!");
@@ -79,7 +80,7 @@ const Addproduct = () => {
     },
     validationSchema: schema,
     onSubmit: (values) => {
-      alert(JSON.stringify(values, null, 2));
+      // alert(JSON.stringify(values, null, 2));
       dispatch(createProduct(values));
       // formik.resetForm();
       // setTimeout(() => {

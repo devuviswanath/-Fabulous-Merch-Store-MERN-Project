@@ -38,6 +38,7 @@ const Addcat = () => {
   useEffect(() => {
     if (isSuccess && createdCategory) {
       toast.success("Category Added Successfullly!");
+      navigate("/admin/list-category");
     }
     if (isSuccess && updatedCategory) {
       toast.success("Category Updated Successfullly!");
