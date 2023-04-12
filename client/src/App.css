@@ -728,6 +728,10 @@ td {
   display: flex;
   flex-direction: column;
 }
+
+label input[type="radio"] {
+  margin-right: 10px;
+}
 /* Main Product Page */
 
 /* Cart Page */

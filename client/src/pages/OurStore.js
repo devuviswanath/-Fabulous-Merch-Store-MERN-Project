@@ -7,13 +7,17 @@ import Container from "../components/Container";
 import { useDispatch, useSelector } from "react-redux";
 import { getAllProducts } from "../features/product/productSlice";
 import { getCategories } from "../features/pcategory/pcategorySlice";
+import { getBrand } from "../features/pbrand/pbrandSlice";
+import { Link } from "react-router-dom";
 
 const OurStore = () => {
   const [grid, setGrid] = useState(12);
   const [selectedCategories, setSelectedCategories] = useState([]);
+  const [selectedBrand, setselectedBrand] = useState([]);
   const [filteredData, setFilteredData] = useState([]);
   const [query, setQuery] = useState({
     category: "",
+    brand: "",
     price: {
       gte: "",
       lte: "",
@@ -22,6 +26,7 @@ const OurStore = () => {
   const [params, setParams] = useState({});
   const productState = useSelector((state) => state?.product?.product);
   const pCatStat = useSelector((state) => state?.pCategory?.pCategories);
+  const pbrandStat = useSelector((state) => state?.pBrand?.pbrands);
   const dispatch = useDispatch();
   useEffect(() => {
     const newParams = {};
@@ -44,25 +49,41 @@ const OurStore = () => {
       setParams({});
     }
   }, [query]);
-  console.log(query);
+  console.log(params);
   useEffect(() => {
     dispatch(getAllProducts(params));
     dispatch(getCategories());
-  }, []);
+    dispatch(getBrand());
+  }, [params]);
 
   const handleCheckboxChange = (event) => {
-    const { value, checked } = event.target;
+    const { value } = event.target;
     console.log(value);
-    if (checked) {
-      setSelectedCategories([...selectedCategories, value]); // Add selected category to array
-    } else {
-      setSelectedCategories(
-        selectedCategories.filter((category) => category !== value)
-      ); // Remove deselected category from array
-    }
-
-    setQuery({ ...query, category: selectedCategories });
+    setSelectedCategories(value);
+    setQuery({ ...query, category: value });
   };
+
+  const handleBrandCheckboxChange = (event) => {
+    const { value } = event.target;
+    console.log(value);
+    setselectedBrand(value);
+    setQuery({ ...query, brand: value });
+  };
+
+  const handleClick = (event) => {
+    setQuery({
+      category: "",
+      brand: "",
+      price: {
+        gte: "",
+        lte: "",
+      }
+    }
+    );
+    setSelectedCategories("");
+    setselectedBrand("");
+  }
+
   return (
     <>
       <Meta title={"Our Store"} />
@@ -79,10 +100,28 @@ const OurStore = () => {
                       return (
                         <label key={item.title}>
                           <input
-                            type="checkbox"
+                            type="radio"
                             value={item.title}
-                            checked={selectedCategories.includes(item.title)}
+                            checked={selectedCategories === item.title}
                             onChange={handleCheckboxChange}
+                          />
+                          {item.title}
+                        </label>
+                      );
+                    })}
+                  </div>
+                </div>
+                <div>
+                  <h5 className="sub-title">Brand</h5>
+                  <div className="multi-check">
+                    {pbrandStat?.map((item, index) => {
+                      return (
+                        <label key={item.title}>
+                          <input
+                            type="radio"
+                            value={item.title}
+                            checked={selectedBrand === item.title}
+                            onChange={handleBrandCheckboxChange}
                           />
                           {item.title}
                         </label>
@@ -122,6 +161,13 @@ const OurStore = () => {
                     />
                     <label htmlFor="floatingInput">To</label>
                   </div>
+                </div>
+                <div>
+                  <h5 className="sub-title"></h5>
+                  <button className="button"
+                    onClick={handleClick}>
+                    Reset All
+                  </button>
                 </div>
                 {/* <h5 className="sub-title">Colors</h5>
                 <div>
@@ -296,7 +342,7 @@ const OurStore = () => {
             </div>
           </div>
         </div>
-      </Container>
+      </Container >
     </>
   );
 };
