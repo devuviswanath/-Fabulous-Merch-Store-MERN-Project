@@ -3,9 +3,6 @@ import ReactStars from "react-rating-stars-component";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import prodcompare from "../images/prodcompare.svg";
 import wish from "../images/wish.svg";
-import wishlist from "../images/wishlist.svg";
-import watch from "../images/watch.jpg";
-import watch2 from "../images/watch-1.avif";
 import addcart from "../images/add-cart.svg";
 import view from "../images/view.svg";
 const ProductCard = (props) => {
@@ -36,9 +33,16 @@ const ProductCard = (props) => {
                 </button>
               </div>
               <div className="product-image">
-                
-                <img src={item?.images[0]?.url} className="img-fluid  mx-auto" alt="product image" />
-                <img src={item?.images[0]?.url} className="img-fluid  mx-auto" alt="product image" />
+                <img
+                  src={item?.images[0]?.url}
+                  className="img-fluid  mx-auto"
+                  alt="product image"
+                />
+                <img
+                  src={item?.images[0]?.url}
+                  className="img-fluid  mx-auto"
+                  alt="product image"
+                />
               </div>
               <div className="product-details">
                 <h6 className="brand">{item.brand}</h6>
@@ -50,9 +54,12 @@ const ProductCard = (props) => {
                   edit={false}
                   activeColor="#ffd700"
                 />
-                <p className={`description ${grid === 12 ? "d-block" : "d-none"}`}
-                dangerouslySetInnerHTML={{ __html: item?.description }}>
-                </p>
+                <p
+                  className={`description ${
+                    grid === 12 ? "d-block" : "d-none"
+                  }`}
+                  dangerouslySetInnerHTML={{ __html: item?.description }}
+                ></p>
                 <p className="price">{item.price}</p>
               </div>
               <div className="action-bar position-absolute">

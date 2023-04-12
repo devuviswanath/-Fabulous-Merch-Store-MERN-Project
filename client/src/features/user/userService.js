@@ -81,7 +81,22 @@ const getOrder = async (id) => {
 };
 const emptyCartItems = async () => {
   const response = await instance.delete(`${base_url}user/empty-cart`, config);
-  console.log("***********", response);
+  if (response.data) {
+    return response.data;
+  }
+};
+const forgotPasswordToken = async (email) => {
+  const response = await instance.post(
+    `${base_url}user/forgot-password-token`,
+    email
+  );
+  if (response.data) {
+    localStorage.setItem("userId", response.data.userId);
+    return response.data;
+  }
+};
+const UpdatePassword = async (details) => {
+  const response = await instance.put(`${base_url}user/password`, details);
   if (response.data) {
     return response.data;
   }
@@ -97,5 +112,7 @@ export const authService = {
   updateProductFromCart,
   createOrder,
   emptyCartItems,
-  getOrder
+  getOrder,
+  forgotPasswordToken,
+  UpdatePassword,
 };

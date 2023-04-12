@@ -51,7 +51,6 @@ const Orders = () => {
   return (
     <>
       <Meta title={"Cart"} />
-      <BreadCrumb title="Cart" />
       <Container class1="cart-wrapper home-wrapper-2 py-5">
         <div className="row">
           <div className="col-12">
@@ -129,15 +128,6 @@ const Orders = () => {
               <Link to="/product" className="button">
                 Continue To Shopping
               </Link>
-              {(totalAmount !== null || totalAmount !== 0) && (
-                <div className="d-flex flex-column align-items-end">
-                  <h4>SubTotal: $ {totalAmount}</h4>
-                  <p>Taxes and shipping calculated at checkout</p>
-                  <Link to="/checkout" className="button">
-                    Checkout
-                  </Link>
-                </div>
-              )}
             </div>
           </div>
         </div>

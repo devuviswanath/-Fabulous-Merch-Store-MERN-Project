@@ -3,7 +3,6 @@ import BreadCrumb from "../components/BreadCrumb";
 import Meta from "../components/Meta";
 import ReactStars from "react-rating-stars-component";
 import ProductCard from "../components/ProductCard";
-import Color from "../components/Color";
 import Container from "../components/Container";
 import { useDispatch, useSelector } from "react-redux";
 import { getAllProducts } from "../features/product/productSlice";
@@ -17,8 +16,8 @@ const OurStore = () => {
     category: "",
     price: {
       gte: "",
-      lte: ""
-    }
+      lte: "",
+    },
   });
   const [params, setParams] = useState({});
   const productState = useSelector((state) => state?.product?.product);
@@ -28,7 +27,7 @@ const OurStore = () => {
     const newParams = {};
 
     for (const [key, value] of Object.entries(query)) {
-      if (value && typeof value === 'object') {
+      if (value && typeof value === "object") {
         for (const [subKey, subValue] of Object.entries(value)) {
           if (subValue) {
             newParams[`${key}[${subKey}]`] = subValue;
@@ -45,19 +44,21 @@ const OurStore = () => {
       setParams({});
     }
   }, [query]);
-console.log(query)
+  console.log(query);
   useEffect(() => {
     dispatch(getAllProducts(params));
     dispatch(getCategories());
-  }, [])
+  }, []);
 
   const handleCheckboxChange = (event) => {
     const { value, checked } = event.target;
-    console.log(value)
+    console.log(value);
     if (checked) {
       setSelectedCategories([...selectedCategories, value]); // Add selected category to array
     } else {
-      setSelectedCategories(selectedCategories.filter(category => category !== value)); // Remove deselected category from array
+      setSelectedCategories(
+        selectedCategories.filter((category) => category !== value)
+      ); // Remove deselected category from array
     }
 
     setQuery({ ...query, category: selectedCategories });
@@ -84,7 +85,8 @@ console.log(query)
                             onChange={handleCheckboxChange}
                           />
                           {item.title}
-                        </label>)
+                        </label>
+                      );
                     })}
                   </div>
                 </div>
@@ -99,7 +101,7 @@ console.log(query)
                       onChange={(event) =>
                         setQuery({
                           ...query,
-                          price: { ...query.price, gte: event.target.value }
+                          price: { ...query.price, gte: event.target.value },
                         })
                       }
                     />
@@ -114,7 +116,7 @@ console.log(query)
                       onChange={(event) =>
                         setQuery({
                           ...query,
-                          price: { ...query.price, lte: event.target.value }
+                          price: { ...query.price, lte: event.target.value },
                         })
                       }
                     />
@@ -225,9 +227,7 @@ console.log(query)
             <div className="filter-sort-grid mb-4">
               <div className="d-flex justify-content-between align-items-center">
                 <div className="d-flex align-items-center gap-10">
-                  <p className="mb-0 d-block" style={{ width: "100px" }}>
-
-                  </p>
+                  <p className="mb-0 d-block" style={{ width: "100px" }}></p>
                   {/* <select
                     name=""
                     defaultValue={"manula"}
