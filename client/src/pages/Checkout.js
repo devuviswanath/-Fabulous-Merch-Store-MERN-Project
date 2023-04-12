@@ -96,7 +96,6 @@ const Checkout = () => {
         <div className="row">
           <div className="col-7">
             <div className="checkout-left-data">
-              <h3 className="website-name">Dev Corner</h3>
               <nav
                 style={{ "--bs-breadcrumb-divider": ">" }}
                 aria-label="breadcrumb"
@@ -108,13 +107,6 @@ const Checkout = () => {
                     </Link>
                   </li>
                   &nbsp; /&nbsp;
-                  <li
-                    className="breadcrumb-ite total-price active"
-                    aria-current="page"
-                  >
-                    Information
-                  </li>
-                  &nbsp; /
                   <li className="breadcrumb-item total-price active">
                     Shipping
                   </li>
@@ -128,9 +120,7 @@ const Checkout = () => {
                 </ol>
               </nav>
               <h4 className="title total">Contact Information</h4>
-              <p className="user-details total">
-                Navdeep Dahiya (monud0232@gmail.com)
-              </p>
+              <p className="user-details total">{user.user.email}</p>
               <h4 className="mb-3">Shipping Address</h4>
               <form
                 onSubmit={formik.handleSubmit}

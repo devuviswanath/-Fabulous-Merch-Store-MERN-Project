@@ -54,7 +54,7 @@ const SingleProduct = () => {
     zoomWidth: 600,
 
     img: productState?.images[0]?.url
-      ? productState?.images[0].url
+      ? productState?.images[0]?.url
       : "https://images.pexels.com/photos/190819/pexels-photo-190819.jpeg?cs=srgb&dl=pexels-fernando-arcos-190819.jpg&fm=jpg",
   };
 
@@ -234,8 +234,8 @@ const SingleProduct = () => {
             <h4>Description</h4>
             <div className="bg-white p-3">
               <p
-                dangerouslySetInnerHTML={{ __html: productState?.description }}>
-                </p>
+                dangerouslySetInnerHTML={{ __html: productState?.description }}
+              ></p>
             </div>
           </div>
         </div>

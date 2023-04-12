@@ -103,6 +103,26 @@ export const getOrderByUser = createAsyncThunk(
     }
   }
 );
+export const forgotPassword = createAsyncThunk(
+  "user/forgot-password",
+  async (email, thunkAPI) => {
+    try {
+      return await authService.forgotPasswordToken(email);
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error);
+    }
+  }
+);
+export const resetPassword = createAsyncThunk(
+  "user/update-password",
+  async (details, thunkAPI) => {
+    try {
+      return await authService.UpdatePassword(details);
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error);
+    }
+  }
+);
 
 const getCustomerfromLocalStorate = localStorage.getItem("customer")
   ? JSON.parse(localStorage.getItem("customer"))
@@ -300,6 +320,48 @@ export const authSlice = createSlice({
         state.isError = true;
         state.isSuccess = false;
         state.message = action.error;
+      })
+      .addCase(forgotPassword.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(forgotPassword.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.isError = false;
+        state.isSuccess = true;
+        state.sendlink = action.payload;
+        if (state.isSuccess) {
+          toast.success("Link send to mail");
+        }
+      })
+      .addCase(forgotPassword.rejected, (state, action) => {
+        state.isLoading = false;
+        state.isError = true;
+        state.isSuccess = false;
+        state.message = action.error;
+        if (state.isError) {
+          toast.success("something went wrong");
+        }
+      })
+      .addCase(resetPassword.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(resetPassword.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.isError = false;
+        state.isSuccess = true;
+        state.passwordUpdated = action.payload;
+        if (state.isSuccess) {
+          toast.success("Password Updated Successfully ");
+        }
+      })
+      .addCase(resetPassword.rejected, (state, action) => {
+        state.isLoading = false;
+        state.isError = true;
+        state.isSuccess = false;
+        state.message = action.error;
+        if (state.isError) {
+          toast.success("something went wrong");
+        }
       })
       .addCase(getOrderByUser.pending, (state) => {
         state.isLoading = true;
