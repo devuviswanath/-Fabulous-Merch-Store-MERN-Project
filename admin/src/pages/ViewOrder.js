@@ -23,10 +23,6 @@ const columns = [
     dataIndex: "count",
   },
   {
-    title: "Color",
-    dataIndex: "color",
-  },
-  {
     title: "Amount",
     dataIndex: "amount",
   },
@@ -34,7 +30,7 @@ const columns = [
     title: "Date",
     dataIndex: "date",
   },
-
+  
   {
     title: "Action",
     dataIndex: "action",
@@ -44,22 +40,22 @@ const columns = [
 const ViewOrder = () => {
   const location = useLocation();
   const userId = location.pathname.split("/")[3];
+  console.log(userId);
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(getOrderByUser(userId));
-  }, []);
-  const orderState = useSelector((state) => state.auth.orderbyuser[0].products);
+  },[]);
+  const orderState = useSelector((state) => state?.auth?.orderbyuser);
   console.log(orderState);
   const data1 = [];
   for (let i = 0; i < orderState.length; i++) {
     data1.push({
       key: i + 1,
-      name: orderState[i].product.title,
-      brand: orderState[i].product.brand,
-      count: orderState[i].count,
-      amount: orderState[i].product.price,
-      color: orderState[i].product.color,
-      date: orderState[i].product.createdAt,
+      name: orderState[i].orderItems[0].product.title,
+      brand: orderState[i].orderItems[0].product.brand,
+      count: orderState[i].orderItems[0].quantity,
+      amount: orderState[i].orderItems[0].product.price,
+      date: orderState[i].orderItems[0].product.createdAt,
       action: (
         <>
           <Link to="/" className=" fs-3 text-danger">
@@ -80,6 +76,7 @@ const ViewOrder = () => {
       </div>
     </div>
   );
-};
+}
+;
 
 export default ViewOrder;

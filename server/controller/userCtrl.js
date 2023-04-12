@@ -481,11 +481,12 @@ const applyCoupon = asyncHandler(async (req, res) => {
 
 const getOrders = asyncHandler(async (req, res) => {
   const { _id } = req.user;
+  console.log(_id );
   validateMongoDbId(_id);
   try {
-    const userorders = await Order.findOne({ orderby: _id })
-      .populate("products.product")
-      .populate("orderby")
+    const userorders = await Order.findOne({ user: _id })
+      .populate("orderItems.product")
+      .populate("user")
       .exec();
     res.json(userorders);
   } catch (error) {
@@ -495,9 +496,10 @@ const getOrders = asyncHandler(async (req, res) => {
 
 const getAllOrders = asyncHandler(async (req, res) => {
   try {
+    console.log("here")
     const alluserorders = await Order.find()
-      .populate("products.product")
-      .populate("orderby")
+      .populate("orderItems.product")
+      .populate("user")
       .exec();
     res.json(alluserorders);
   } catch (error) {
@@ -506,11 +508,12 @@ const getAllOrders = asyncHandler(async (req, res) => {
 });
 const getOrderByUserId = asyncHandler(async (req, res) => {
   const { id } = req.params;
+  console.log(id);
   validateMongoDbId(id);
   try {
-    const userorders = await Order.findOne({ orderby: id })
-      .populate("products.product")
-      .populate("orderby")
+    const userorders = await Order.find({ user: id })
+      .populate("orderItems.product")
+      .populate("user")
       .exec();
     res.json(userorders);
   } catch (error) {

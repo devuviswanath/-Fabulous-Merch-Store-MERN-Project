@@ -38,7 +38,7 @@ const Login = () => {
     }
   }, [user, isError, isSuccess, isLoading]);
   return (
-    <div className="py-5" style={{ background: "#ffd333", minHeight: "100vh" }}>
+    <div className="py-5" style={{ background: "#212529", minHeight: "100vh" }}>
       <br />
       <br />
       <br />
@@ -75,14 +75,14 @@ const Login = () => {
           <div className="error mt-2">
             {formik.touched.password && formik.errors.password}
           </div>
-          <div className="mb-3 text-end">
+          {/* <div className="mb-3 text-end">
             <Link to="forgot-password" className="">
               Forgot Password?
             </Link>
-          </div>
+          </div> */}
           <button
             className="border-0 px-3 py-2 text-white fw-bold w-100 text-center text-decoration-none fs-5"
-            style={{ background: "#ffd333" }}
+            style={{ background: "#212529" }}
             type="submit"
           >
             Login

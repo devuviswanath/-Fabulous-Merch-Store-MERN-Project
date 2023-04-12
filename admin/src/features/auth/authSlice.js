@@ -7,6 +7,7 @@ const getUserfromLocalStorage = localStorage.getItem("user")
 const initialState = {
   user: getUserfromLocalStorage,
   orders: [],
+  orderbyuser:[],
   isError: false,
   isLoading: false,
   isSuccess: false,
@@ -37,7 +38,8 @@ export const getOrderByUser = createAsyncThunk(
   "order/get-order",
   async (id, thunkAPI) => {
     try {
-      return await authService.getOrder(id);
+      console.log(id);
+      return await authService.getOrderByUser(id);
     } catch (error) {
       return thunkAPI.rejectWithValue(error);
     }

@@ -15,12 +15,8 @@ const columns = [
     dataIndex: "name",
   },
   {
-    title: "Product",
-    dataIndex: "product",
-  },
-  {
-    title: "Amount",
-    dataIndex: "amount",
+    title: "View",
+    dataIndex: "view",
   },
   {
     title: "Date",
@@ -42,15 +38,15 @@ const Orders = () => {
 
   const data1 = [];
   for (let i = 0; i < orderState.length; i++) {
+    console.log(orderState)
     data1.push({
       key: i + 1,
-      name: orderState[i].orderby.firstname,
-      product: (
-        <Link to={`/admin/order/${orderState[i].orderby._id}`}>
-          View Orders
+      name: orderState[i].user.fname,
+      view: (
+        <Link to={`/admin/order/${orderState[i].user._id}`}>
+          View Order
         </Link>
       ),
-      amount: orderState[i].paymentIntent.amount,
       date: new Date(orderState[i].createdAt).toLocaleString(),
       action: (
         <>

@@ -13,10 +13,10 @@ const getOrders = async () => {
 
   return response.data;
 };
-const getOrder = async (id) => {
-  const response = await axios.ger(
+const getOrderByUser = async (id) => {
+  console.log("here again")
+  const response = await axios.get(
     `${base_url}user/getorderbyuser/${id}`,
-    "",
     config
   );
 
@@ -26,7 +26,7 @@ const getOrder = async (id) => {
 const authService = {
   login,
   getOrders,
-  getOrder,
+  getOrderByUser,
 };
 
 export default authService;
