@@ -16,6 +16,7 @@ const Cart = () => {
   const dispatch = useDispatch();
   const [totalAmount, setTotalAmount] = useState(null);
   const userCartState = useSelector((state) => state.auth.cartProducts);
+  console.log(userCartState);
   useEffect(() => {
     dispatch(getUserCart());
   }, []);
@@ -67,7 +68,7 @@ const Cart = () => {
                     <div className="cart-col-1 gap-15 d-flex align-items-center">
                       <div className="w-25">
                         <img
-                          src={item?.productId.images[0].url}
+                          src={item?.productId?.images[0]?.url}
                           className="img-fluid"
                           alt="product image"
                         />

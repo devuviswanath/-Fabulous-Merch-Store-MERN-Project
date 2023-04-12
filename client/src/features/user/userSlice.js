@@ -110,6 +110,7 @@ const getCustomerfromLocalStorate = localStorage.getItem("customer")
 
 const initialState = {
   user: getCustomerfromLocalStorate,
+  userorder:[],
   isError: false,
   isSuccess: false,
   isLoading: false,
@@ -299,7 +300,22 @@ export const authSlice = createSlice({
         state.isError = true;
         state.isSuccess = false;
         state.message = action.error;
-      });
+      })
+      .addCase(getOrderByUser.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(getOrderByUser.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.isError = false;
+        state.isSuccess = true;
+        state.userorder = action.payload;
+      })
+      .addCase(getOrderByUser.rejected, (state, action) => {
+        state.isLoading = false;
+        state.isError = true;
+        state.isSuccess = false;
+        state.message = action.error;
+      });;
   },
 });
 

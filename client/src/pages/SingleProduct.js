@@ -77,7 +77,6 @@ const SingleProduct = () => {
   return (
     <>
       <Meta title={"Product Name"} />
-      <BreadCrumb title="Product Name" />
       <Container class1="main-product-wrapper py-5 home-wrapper-2">
         <div className="row">
           <div className="col-6">
@@ -101,21 +100,8 @@ const SingleProduct = () => {
               <div className="border-bottom">
                 <h3 className="title">{productState?.title}</h3>
               </div>
-              <div className="border-bottom py-3">
+              <div className="py-3">
                 <p className="price">$ {productState?.price}</p>
-                <div className="d-flex align-items-center gap-10">
-                  <ReactStars
-                    count={5}
-                    size={24}
-                    value={4}
-                    edit={false}
-                    activeColor="#ffd700"
-                  />
-                  <p className="mb-0 t-review">( 2 Reviews )</p>
-                </div>
-                <a className="review-btn" href="#review">
-                  Write a Review
-                </a>
               </div>
               <div className=" py-3">
                 <div className="d-flex gap-10 align-items-center my-2">
@@ -158,8 +144,8 @@ const SingleProduct = () => {
                 {alreadyAdded == false && (
                   <>
                     <div className="d-flex gap-10 flex-column mt-2 mb-3">
-                      <h3 className="product-heading">Color :</h3>
-                      <Color />
+                      {/* <h3 className="product-heading">Color :</h3>
+                      <Color /> */}
                     </div>
                   </>
                 )}

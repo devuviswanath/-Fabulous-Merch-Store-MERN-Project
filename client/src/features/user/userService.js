@@ -72,8 +72,7 @@ const createOrder = async (orderDetail) => {
 
 const getOrder = async (id) => {
   const response = await instance.get(
-    `${base_url}user/getorderbyuser/${id}`,
-    "",
+    `${base_url}user/getorderdetails/${id}`,
     config
   );
 

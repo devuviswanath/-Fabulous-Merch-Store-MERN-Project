@@ -666,7 +666,7 @@ td {
 }
 .main-product-image img {
   width: 100% !important;
-  height: 625px !important;
+  height: 390px !important;
   object-fit: cover;
 }
 .other-product-images {

@@ -10,7 +10,7 @@ import { getAllProducts } from "../features/product/productSlice";
 import { getCategories } from "../features/pcategory/pcategorySlice";
 
 const OurStore = () => {
-  const [grid, setGrid] = useState(4);
+  const [grid, setGrid] = useState(12);
   const [selectedCategories, setSelectedCategories] = useState([]);
   const [filteredData, setFilteredData] = useState([]);
   const [query, setQuery] = useState({
@@ -171,7 +171,7 @@ console.log(query)
                 </div>
               </div>
             </div>
-            <div className="filter-card mb-3">
+            {/* <div className="filter-card mb-3">
               <h3 className="filter-title">Random Product</h3>
               <div>
                 <div className="random-products mb-3 d-flex">
@@ -219,7 +219,7 @@ console.log(query)
                   </div>
                 </div>
               </div>
-            </div>
+            </div> */}
           </div>
           <div className="col-9">
             <div className="filter-sort-grid mb-4">

@@ -6,114 +6,61 @@ import { Link } from "react-router-dom";
 import Container from "../components/Container";
 import { useDispatch, useSelector } from "react-redux";
 import {
-  getUserCart,
-  deleteCartProduct,
-  updateCartProduct,
+  getOrderByUser
 } from "../features/user/userSlice";
 
 const Orders = () => {
-  const [productUpdateDetail, setProductUpdateDetail] = useState(null);
   const dispatch = useDispatch();
-  const [totalAmount, setTotalAmount] = useState(null);
-  const userCartState = useSelector((state) => state.auth.cartProducts);
+  const userId = useSelector((state) => state.auth.user._id);
+  const userOrderState = useSelector((state) => state.auth.userorder);
   useEffect(() => {
-    dispatch(getUserCart());
+    dispatch(getOrderByUser(userId));
   }, []);
-  useEffect(() => {
-    if (productUpdateDetail !== null) {
-      dispatch(
-        updateCartProduct({
-          cartItemId: productUpdateDetail?.cartItemId,
-          quantity: productUpdateDetail?.quantity,
-        })
-      );
-      setTimeout(() => {
-        dispatch(getUserCart());
-      }, 200);
-    }
-  }, [productUpdateDetail]);
-  const deleteACartProduct = (id) => {
-    dispatch(deleteCartProduct(id));
-    setTimeout(() => {
-      dispatch(getUserCart());
-    }, 200);
-  };
-  useEffect(() => {
-    let sum = 0;
-    for (let index = 0; index < userCartState?.length; index++) {
-      sum =
-        sum +
-        Number(userCartState[index].quantity) * userCartState[index].price;
-      setTotalAmount(sum);
-    }
-  }, [userCartState]);
+
 
   return (
     <>
-      <Meta title={"Cart"} />
-      <BreadCrumb title="Cart" />
+      <Meta title={"Orders"} />
       <Container class1="cart-wrapper home-wrapper-2 py-5">
         <div className="row">
           <div className="col-12">
-            <div className="cart-header py-3 d-flex justify-content-between align-items-center">
+            <div className="cart-header py-3 d-flex align-items-center">
               <h4 className="cart-col-1">Product</h4>
-              <h4 className="cart-col-2">Price</h4>
-              <h4 className="cart-col-3">Quantity</h4>
-              <h4 className="cart-col-4">Total</h4>
+              <h4 className="cart-col-2">Brand</h4>
+              <h4 className="cart-col-3">Count</h4>
+              <h4 className="cart-col-4">Amount</h4>
+              <h4 className="cart-col-5">Date</h4>
             </div>
-            {userCartState &&
-              userCartState?.map((item, index) => {
+            {userOrderState &&
+              userOrderState?.map((item, key) => {
                 return (
-                  <div className="cart-data py-3 mb-2 d-flex justify-content-between align-items-center">
+                  <div className="cart-data mb-2 py-3 d-flex justify-content-between align-items-center">
                     <div className="cart-col-1 gap-15 d-flex align-items-center">
-                      <div className="w-25">
+                    <div className="w-25">
                         <img
-                          src={item?.productId.images[0].url}
+                          src={item?.orderItems[0]?.product?.images[0]?.url}
                           className="img-fluid"
                           alt="product image"
                         />
                       </div>
                       <div className="w-75">
-                        <p>{item?.productId.title}</p>
+                        <p>{item?.orderItems[0]?.product?.title}</p>
                       </div>
                     </div>
                     <div className="cart-col-2">
-                      <h5 className="price">$ {item?.productId.price}</h5>
+                      <h5 className="price">{item?.orderItems[0]?.product?.brand}</h5>
                     </div>
                     <div className="cart-col-3 d-flex align-items-center gap-15">
-                      <div>
-                        <input
-                          className="form-control"
-                          type="number"
-                          name=""
-                          min={1}
-                          max={10}
-                          id=""
-                          value={
-                            productUpdateDetail?.quantity
-                              ? productUpdateDetail?.quantity
-                              : item?.quantity
-                          }
-                          onChange={(e) => {
-                            setProductUpdateDetail({
-                              cartItemId: item?._id,
-                              quantity: e.target.value,
-                            });
-                          }}
-                        />
-                      </div>
-                      <div>
-                        <AiFillDelete
-                          onClick={() => {
-                            deleteACartProduct(item?._id);
-                          }}
-                          className="text-danger "
-                        />
-                      </div>
+                    <h5 className="price">{item?.orderItems[0]?.product?.quantity}</h5>
                     </div>
                     <div className="cart-col-4">
                       <h5 className="price">
-                        $ {item?.productId.price * item?.quantity}
+                        {item?.orderItems[0]?.product?.price}
+                      </h5>
+                    </div>
+                    <div className="cart-col-5">
+                      <h5 className="price">
+                        {new Date(item?.orderItems[0]?.product?.createdAt).toLocaleString()}
                       </h5>
                     </div>
                   </div>
@@ -122,26 +69,7 @@ const Orders = () => {
           </div>
         </div>
       </Container>
-      <Container class1="cart-wrapper home-wrapper-2 py-5">
-        <div className="row">
-          <div className="col-12 py-2 mt-4">
-            <div className="d-flex justify-content-between align-items-baseline">
-              <Link to="/product" className="button">
-                Continue To Shopping
-              </Link>
-              {(totalAmount !== null || totalAmount !== 0) && (
-                <div className="d-flex flex-column align-items-end">
-                  <h4>SubTotal: $ {totalAmount}</h4>
-                  <p>Taxes and shipping calculated at checkout</p>
-                  <Link to="/checkout" className="button">
-                    Checkout
-                  </Link>
-                </div>
-              )}
-            </div>
-          </div>
-        </div>
-      </Container>
+   
     </>
   );
 };

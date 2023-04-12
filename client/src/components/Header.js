@@ -95,7 +95,7 @@ const Header = () => {
           </div>
         </div>
       </header>
-      <header className="header-bottom py-3">
+      {/* <header className="header-bottom py-3">
         <div className="container-xxl">
           <div className="row">
             <div className="col-5">
@@ -114,7 +114,7 @@ const Header = () => {
             </div>
           </div>
         </div>
-      </header>
+      </header> */}
     </>
   );
 };
