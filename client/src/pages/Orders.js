@@ -5,9 +5,7 @@ import { AiFillDelete } from "react-icons/ai";
 import { Link } from "react-router-dom";
 import Container from "../components/Container";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  getOrderByUser
-} from "../features/user/userSlice";
+import { getOrderByUser } from "../features/user/userSlice";
 
 const Orders = () => {
   const dispatch = useDispatch();
@@ -16,7 +14,6 @@ const Orders = () => {
   useEffect(() => {
     dispatch(getOrderByUser(userId));
   }, []);
-
 
   return (
     <>
@@ -36,7 +33,7 @@ const Orders = () => {
                 return (
                   <div className="cart-data mb-2 py-3 d-flex justify-content-between align-items-center">
                     <div className="cart-col-1 gap-15 d-flex align-items-center">
-                    <div className="w-25">
+                      <div className="w-25">
                         <img
                           src={item?.orderItems[0]?.product?.images[0]?.url}
                           className="img-fluid"
@@ -48,10 +45,14 @@ const Orders = () => {
                       </div>
                     </div>
                     <div className="cart-col-2">
-                      <h5 className="price">{item?.orderItems[0]?.product?.brand}</h5>
+                      <h5 className="price">
+                        {item?.orderItems[0]?.product?.brand}
+                      </h5>
                     </div>
                     <div className="cart-col-3 d-flex align-items-center gap-15">
-                    <h5 className="price">{item?.orderItems[0]?.product?.quantity}</h5>
+                      <h5 className="price">
+                        {item?.orderItems[0]?.product?.quantity}
+                      </h5>
                     </div>
                     <div className="cart-col-4">
                       <h5 className="price">
@@ -60,7 +61,7 @@ const Orders = () => {
                     </div>
                     <div className="cart-col-5">
                       <h5 className="price">
-                        {new Date(item?.orderItems[0]?.product?.createdAt).toLocaleString()}
+                        {new Date(item?.createdAt).toLocaleString()}
                       </h5>
                     </div>
                   </div>
@@ -69,7 +70,6 @@ const Orders = () => {
           </div>
         </div>
       </Container>
-   
     </>
   );
 };

@@ -30,10 +30,10 @@ const columns = [
     dataIndex: "price",
     sorter: (a, b) => a.price - b.price,
   },
-  {
-    title: "Action",
-    dataIndex: "action",
-  },
+  // {
+  //   title: "Action",
+  //   dataIndex: "action",
+  // },
 ];
 
 const Productlist = () => {
@@ -50,16 +50,16 @@ const Productlist = () => {
       brand: productState[i].brand,
       category: productState[i].category,
       price: `${productState[i].price}`,
-      action: (
-        <>
-          <Link to="/" className=" fs-3 text-danger">
-            <BiEdit />
-          </Link>
-          <Link className="ms-3 fs-3 text-danger" to="/">
-            <AiFillDelete />
-          </Link>
-        </>
-      ),
+      //   action: (
+      //     <>
+      //       <Link to="/" className=" fs-3 text-danger">
+      //         <BiEdit />
+      //       </Link>
+      //       <Link className="ms-3 fs-3 text-danger" to="/">
+      //         <AiFillDelete />
+      //       </Link>
+      //     </>
+      //   ),
     });
   }
   console.log(data1);

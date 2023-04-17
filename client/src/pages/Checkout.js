@@ -84,7 +84,6 @@ const Checkout = () => {
         totalPriceAfterDiscount: totalAmount,
         orderItems: cartProductState,
         shippingInfo: values,
-        // paymentInfo,
       })
     );
     dispatch(emptyCart());
@@ -254,11 +253,7 @@ const Checkout = () => {
                       Continue to Shipping
                     </Link>
                     {/* <PayButton cartItems={cartProductState} /> */}
-                    <button
-                      className="button"
-                      type="submit"
-                      // onClick={handleCheckout()}
-                    >
+                    <button className="button" type="submit">
                       Place Order
                     </button>
                   </div>

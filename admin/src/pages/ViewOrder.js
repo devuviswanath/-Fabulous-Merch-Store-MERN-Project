@@ -26,15 +26,15 @@ const columns = [
     title: "Amount",
     dataIndex: "amount",
   },
-  {
-    title: "Date",
-    dataIndex: "date",
-  },
-  
-  {
-    title: "Action",
-    dataIndex: "action",
-  },
+  // {
+  //   title: "Date",
+  //   dataIndex: "date",
+  // },
+
+  // {
+  //   title: "Action",
+  //   dataIndex: "action",
+  // },
 ];
 
 const ViewOrder = () => {
@@ -44,7 +44,7 @@ const ViewOrder = () => {
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(getOrderByUser(userId));
-  },[]);
+  }, []);
   const orderState = useSelector((state) => state?.auth?.orderbyuser);
   console.log(orderState);
   const data1 = [];
@@ -55,17 +55,17 @@ const ViewOrder = () => {
       brand: orderState[i].orderItems[0].product.brand,
       count: orderState[i].orderItems[0].quantity,
       amount: orderState[i].orderItems[0].product.price,
-      date: orderState[i].orderItems[0].product.createdAt,
-      action: (
-        <>
-          <Link to="/" className=" fs-3 text-danger">
-            <BiEdit />
-          </Link>
-          <Link className="ms-3 fs-3 text-danger" to="/">
-            <AiFillDelete />
-          </Link>
-        </>
-      ),
+      // date: orderState[i].orderItems[0].product.createdAt,
+      // action: (
+      //   <>
+      //     <Link to="/" className=" fs-3 text-danger">
+      //       <BiEdit />
+      //     </Link>
+      //     <Link className="ms-3 fs-3 text-danger" to="/">
+      //       <AiFillDelete />
+      //     </Link>
+      //   </>
+      // ),
     });
   }
   return (
@@ -76,7 +76,5 @@ const ViewOrder = () => {
       </div>
     </div>
   );
-}
-;
-
+};
 export default ViewOrder;

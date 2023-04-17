@@ -51,7 +51,7 @@ const Home = () => {
                 />
                 <div className="small-banner-content position-absolute">
                   <h4>NEW ARRIVAL</h4>
-                  <h5>But IPad Air</h5>
+                  <h5>Buy IPad Air</h5>
                   <p>
                     From $999.00 <br /> or $41.62/mo.
                   </p>
@@ -65,7 +65,7 @@ const Home = () => {
                 />
                 <div className="small-banner-content position-absolute">
                   <h4>NEW ARRIVAL</h4>
-                  <h5>But IPad Air</h5>
+                  <h5>Buy IPad Air</h5>
                   <p>
                     From $999.00 <br /> or $41.62/mo.
                   </p>
@@ -79,7 +79,7 @@ const Home = () => {
                 />
                 <div className="small-banner-content position-absolute">
                   <h4>NEW ARRIVAL</h4>
-                  <h5>But IPad Air</h5>
+                  <h5>Buy IPad Air</h5>
                   <p>
                     From $999.00 <br /> or $41.62/mo.
                   </p>
@@ -168,7 +168,7 @@ const Home = () => {
       <Container class1="marque-wrapper home-wrapper-2 py-5">
         <div className="row">
           <div className="col-12">
-          <h3 className="section-heading">Our Popular Brands</h3>
+            <h3 className="section-heading">Our Popular Brands</h3>
             <div className="marquee-inner-wrapper card-wrapper">
               <Marquee className="d-flex">
                 <div className="mx-4 w-25">

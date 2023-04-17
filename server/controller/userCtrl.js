@@ -293,6 +293,7 @@ const updatePassword = asyncHandler(async (req, res) => {
 });
 
 const forgotPasswordToken = asyncHandler(async (req, res) => {
+  console.log("res----", req.body.email);
   // const { email } = req.body.email;
   const user = await User.findOne({ email: req.body.email });
   if (!user) throw new Error("User not found with this email");
@@ -308,6 +309,7 @@ const forgotPasswordToken = asyncHandler(async (req, res) => {
       htm: resetURL,
     };
     sendEmail(data);
+
     const respo = { token: token, userId: user._id };
     res.json(respo);
   } catch (error) {
@@ -361,10 +363,11 @@ const userCart = asyncHandler(async (req, res) => {
 });
 
 const getUserCart = asyncHandler(async (req, res) => {
+  console.log("usercart----", req.user);
   const { _id } = req.user;
   validateMongoDbId(_id);
   try {
-    const cart = await Cart.find({ userId: _id })
+    const cart = await Cart.find({ userId: req.user._id })
       .populate("productId")
       .populate("color");
     res.json(cart);
@@ -485,7 +488,7 @@ const applyCoupon = asyncHandler(async (req, res) => {
 
 const getOrders = asyncHandler(async (req, res) => {
   const { _id } = req.user;
-  console.log(_id );
+  console.log(_id);
   validateMongoDbId(_id);
   try {
     const userorders = await Order.findOne({ user: _id })
@@ -500,7 +503,7 @@ const getOrders = asyncHandler(async (req, res) => {
 
 const getAllOrders = asyncHandler(async (req, res) => {
   try {
-    console.log("here")
+    console.log("here");
     const alluserorders = await Order.find()
       .populate("orderItems.product")
       .populate("user")

@@ -666,7 +666,7 @@ td {
 }
 .main-product-image img {
   width: 100% !important;
-  height: 390px !important;
+  height: 355px !important;
   object-fit: cover;
 }
 .other-product-images {
@@ -724,7 +724,7 @@ td {
   font-size: 14px;
   color: var(--color-777777);
 }
-.multi-check{
+.multi-check {
   display: flex;
   flex-direction: column;
 }

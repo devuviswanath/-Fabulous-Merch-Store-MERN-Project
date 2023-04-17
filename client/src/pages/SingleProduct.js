@@ -24,6 +24,8 @@ const SingleProduct = () => {
   const dispatch = useDispatch();
   const productState = useSelector((state) => state.product.singleproduct);
   const cartState = useSelector((state) => state.auth.cartProducts);
+  const addCartState = useSelector((state) => state.auth.addcartProduct);
+
   useEffect(() => {
     dispatch(getAProduct(getProductId));
     dispatch(getUserCart());
@@ -37,6 +39,7 @@ const SingleProduct = () => {
   }, []);
 
   const uploadCart = () => {
+    console.log("------upload cart---");
     dispatch(
       addProdToCart({
         productId: productState?._id,
@@ -104,10 +107,10 @@ const SingleProduct = () => {
                 <p className="price">$ {productState?.price}</p>
               </div>
               <div className=" py-3">
-                <div className="d-flex gap-10 align-items-center my-2">
+                {/* <div className="d-flex gap-10 align-items-center my-2">
                   <h3 className="product-heading">Type :</h3>
                   <p className="product-data">{productState?.type}</p>
-                </div>
+                </div> */}
                 <div className="d-flex gap-10 align-items-center my-2">
                   <h3 className="product-heading">Brand :</h3>
                   <p className="product-data">{productState?.brand}</p>
@@ -116,10 +119,10 @@ const SingleProduct = () => {
                   <h3 className="product-heading">Category :</h3>
                   <p className="product-data">{productState?.category}</p>
                 </div>
-                <div className="d-flex gap-10 align-items-center my-2">
+                {/* <div className="d-flex gap-10 align-items-center my-2">
                   <h3 className="product-heading">Tags :</h3>
                   <p className="product-data">{productState?.tags}</p>
-                </div>
+                </div> */}
                 <div className="d-flex gap-10 align-items-center my-2">
                   <h3 className="product-heading">Availablity :</h3>
                   <p className="product-data">In Stock</p>

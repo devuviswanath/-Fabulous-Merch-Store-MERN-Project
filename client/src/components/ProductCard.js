@@ -28,12 +28,12 @@ const ProductCard = (props) => {
           >
             <div className="product-card position-relative">
               <div className="wishlist-icon position-absolute">
-              <Link
-                    to={"/product/" + item?._id}
-                    className="border-0 bg-transparent"
-                  >
-                    <img src={view} alt="view" />
-                  </Link>
+                <Link
+                  to={"/product/" + item?._id}
+                  className="border-0 bg-transparent"
+                >
+                  <img src={view} alt="view" />
+                </Link>
               </div>
               <div className="product-image">
                 <img
@@ -50,10 +50,13 @@ const ProductCard = (props) => {
               <div className="product-details">
                 <h6 className="brand">{item.brand}</h6>
                 <h5 className="product-title">{item.title}</h5>
-                <p className={`description ${grid === 12 ? "d-block" : "d-none"}`}
-                dangerouslySetInnerHTML={{ __html: item?.description }}>
-                </p>
-                <p className="price">{item.price}</p>
+                <p
+                  className={`description ${
+                    grid === 12 ? "d-block" : "d-none"
+                  }`}
+                  dangerouslySetInnerHTML={{ __html: item?.description }}
+                ></p>
+                <p className="price">$ {item.price}</p>
               </div>
             </div>
           </div>

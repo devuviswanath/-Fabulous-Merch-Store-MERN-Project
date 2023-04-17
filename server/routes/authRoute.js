@@ -26,7 +26,7 @@ const {
   getAllOrders,
   removeProductFromCart,
   updateProductQuantityFromCart,
-  getOrderByUserId
+  getOrderByUserId,
 } = require("../controller/userCtrl");
 const { authMiddleware, isAdmin } = require("../middlewares/authMiddleware");
 const router = express.Router();

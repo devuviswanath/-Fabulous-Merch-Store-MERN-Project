@@ -23,10 +23,10 @@ const columns = [
     dataIndex: "date",
   },
 
-  {
-    title: "Action",
-    dataIndex: "action",
-  },
+  // {
+  //   title: "Action",
+  //   dataIndex: "action",
+  // },
 ];
 
 const Orders = () => {
@@ -38,26 +38,24 @@ const Orders = () => {
 
   const data1 = [];
   for (let i = 0; i < orderState.length; i++) {
-    console.log(orderState)
+    console.log(orderState);
     data1.push({
       key: i + 1,
       name: orderState[i].user.fname,
       view: (
-        <Link to={`/admin/order/${orderState[i].user._id}`}>
-          View Order
-        </Link>
+        <Link to={`/admin/order/${orderState[i].user._id}`}>View Order</Link>
       ),
       date: new Date(orderState[i].createdAt).toLocaleString(),
-      action: (
-        <>
-          <Link to="/" className=" fs-3 text-danger">
-            <BiEdit />
-          </Link>
-          <Link className="ms-3 fs-3 text-danger" to="/">
-            <AiFillDelete />
-          </Link>
-        </>
-      ),
+      // action: (
+      //   <>
+      //     <Link to="/" className=" fs-3 text-danger">
+      //       <BiEdit />
+      //     </Link>
+      //     <Link className="ms-3 fs-3 text-danger" to="/">
+      //       <AiFillDelete />
+      //     </Link>
+      //   </>
+      // ),
     });
   }
   return (

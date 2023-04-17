@@ -38,6 +38,7 @@ const addToCart = async (cartData) => {
 const getCart = async () => {
   const response = await instance.get(`${base_url}user/cart`, config);
   if (response.data) {
+    console.log("cart-----", response.data);
     return response.data;
   }
 };

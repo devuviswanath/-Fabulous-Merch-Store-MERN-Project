@@ -34,6 +34,7 @@ export const logoutUser = createAsyncThunk(
 export const addProdToCart = createAsyncThunk(
   "auth/cart/add",
   async (cartData, thunkAPI) => {
+    console.log("-----async");
     try {
       return await authService.addToCart(cartData);
     } catch (error) {
@@ -85,7 +86,6 @@ export const emptyCart = createAsyncThunk(
   "auth/cart/empty-cart",
   async (thunkAPI) => {
     try {
-      console.log("-------------");
       return await authService.emptyCartItems();
     } catch (error) {
       return thunkAPI.rejectWithValue(error);
@@ -130,7 +130,7 @@ const getCustomerfromLocalStorate = localStorage.getItem("customer")
 
 const initialState = {
   user: getCustomerfromLocalStorate,
-  userorder:[],
+  userorder: [],
   isError: false,
   isSuccess: false,
   isLoading: false,
@@ -173,7 +173,7 @@ export const authSlice = createSlice({
         state.isSuccess = true;
         state.user = action.payload;
         if (state.isSuccess === true) {
-          localStorage.setItem("token", action.payload.token);
+          localStorage.setItem("customer", JSON.stringify(action.payload));
 
           toast.info("User logged In Successfully");
         }
@@ -217,7 +217,7 @@ export const authSlice = createSlice({
         state.isLoading = false;
         state.isError = false;
         state.isSuccess = true;
-        state.cartProduct = action.payload;
+        state.addcartProduct = action.payload;
         if (state.isSuccess) {
           toast.success(" product added to cart");
         }
@@ -377,7 +377,7 @@ export const authSlice = createSlice({
         state.isError = true;
         state.isSuccess = false;
         state.message = action.error;
-      });;
+      });
   },
 });
 
